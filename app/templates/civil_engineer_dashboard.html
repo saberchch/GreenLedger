@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Civil Engineer Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Civil Engineer Dashboard</h2>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Account Balance</h5>
+                    <p class="card-text display-4">{{ balance }} tokens</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Transaction History</h5>
+                    {% if transactions %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Operation</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in transactions %}
+                                    <tr>
+                                        <td>{{ transaction.timestamp }}</td>
+                                        <td>{{ transaction.operation }}</td>
+                                        <td>{{ transaction.data.amount if transaction.data.amount else 'N/A' }}</td>
+                                        <td>{{ transaction.state }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="card-text">No transaction history available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Submit Carbon Emission</h5>
+                    <form action="{{ url_for('main.report_carbon_emission') }}" method="POST">
+                        <div class="form-group">
+                            <label for="amount">Amount (metric tons):</label>
+                            <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emission_source">Emission Source:</label>
+                            <input type="text" class="form-control" id="emission_source" name="emission_source" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity_type">Activity Type:</label>
+                            <input type="text" class="form-control" id="activity_type" name="activity_type" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="compliance_status">Compliance Status:</label>
+                            <select class="form-control" id="compliance_status" name="compliance_status" required>
+                                <option value="compliant">Compliant</option>
+                                <option value="non-compliant">Non-Compliant</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reporting_period">Reporting Period:</label>
+                            <input type="text" class="form-control" id="reporting_period" name="reporting_period" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Report Emission</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Carbon Emission Graph</h5>
+                    <canvas id="emissionGraph"></canvas> <!-- Placeholder for graph -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Useful Information</h5>
+                    <p>Total Emissions Reported: {{ total_emissions }}</p>
+                    <p>Total Carbon Credits Earned: {{ total_credits }}</p>
+                    <p>Compliance Status: {{ compliance_status }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

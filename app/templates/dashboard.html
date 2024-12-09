@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Dashboard</h1>
+        <p>Hello, {{ username }}!</p>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.civil_engineer_dashboard') }}">Civil Engineer Dashboard</a></li>
+                <li><a href="{{ url_for('main.mechanical_engineer_dashboard') }}">Mechanical Engineer Dashboard</a></li>
+                <li><a href="{{ url_for('main.electronics_engineer_dashboard') }}">Electronics Engineer Dashboard</a></li>
+                <li><a href="{{ url_for('main.manager_dashboard') }}">Manager Dashboard</a></li>
+                <li><a href="{{ url_for('main.analyst_dashboard') }}">Analyst Dashboard</a></li>
+                <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Dashboard Overview</h2>
+        <p>This is a general dashboard where you can access various features of the application.</p>
+        <!-- Add more content or features as needed -->
+    </main>
+    <footer>
+        <p>&copy; 2023 GreenLedger. All rights reserved.</p>
+    </footer>
+</body>
+</html>

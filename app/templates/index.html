@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to GreenLedger{% endblock %}
+
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome to GreenLedger</h1>
+        <p class="lead">Your trusted platform for managing carbon emissions and environmental impact.</p>
+        <hr class="my-4">
+        <p>Join us in making a difference. Register or log in to get started.</p>
+        <a class="btn btn-success btn-lg" href="{{ url_for('main.register') }}" role="button">Register</a>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('main.login') }}" role="button">Login</a>
+    </div>
+{% endblock %}
